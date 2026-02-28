@@ -1,0 +1,13 @@
+# Remove Get Started app
+Get-AppxPackage Microsoft.Getstarted | Remove-AppxPackage
+
+# Disable Cortana
+Get-AppxPackage *Cortana* | Remove-AppxPackage
+
+# Disable SearchIndexer (Windows Search)
+Stop-Service -Name "WSearch" -Force
+Set-Service -Name "WSearch" -StartupType Disabled
+
+# Optional: Stop Windows Update temporarily (lab system)
+Stop-Service -Name "wuauserv" -Force
+Set-Service -Name "wuauserv" -StartupType Manual
